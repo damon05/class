@@ -1,0 +1,56 @@
+<div class="navigation">我的应用 > {{TypeName}}管理 > {{t_title}}</div>
+
+<div class="tabList" ng-show="true">
+    <ul>
+        <li ng-class="{ 'tabList_hover' : data.current == 1 }" ng-click="actions.setCurrent(1)">{{TypeName}}基本信息</li>
+        <li ng-class="{ 'tabList_hover' : data.current == 2 }" ng-click="actions.setCurrent(2)">{{TypeName}}完成信息</li>     
+    </ul>
+</div>
+<div class="clearfix" style="min-height:100px;height:200px;" ng-show="data.current == 1">
+
+    <div class="searchRow clearfix">
+        <div class="left">
+            <label>{{TypeName}}标题：</label>
+            <input type="text" maxlength="200" class="width200" ng-model="Title" />
+        </div>
+    </div>
+    <div class="searchRow clearfix" style="min-height:30px;" ng-show="Type==1">
+        <div class="left">
+            <label>学校：</label>
+            <select class="width287" ng-model="SchoolID" ng-options="m.code as m.name for m in wxSchool"></select>
+        </div>
+    </div>
+    <div class="searchRow clearfix" ng-show="Type==0">
+
+        <div class="left mr15">
+            <label>完成时间：</label>
+            <input type="date" maxlength="15" class="width200" ng-model="FinishTime" />
+        </div>
+    </div>
+    <div class="searchRow clearfix" ng-show="Type==0">
+        <div class="left">
+            <label>学豆赠送信息：</label>
+            <table width="300" style="margin-top:5px;">
+                <thead style="text-align:left">
+                    <tr><th>答对百分比（%）</th><th>赠送学豆数</th></tr>
+                </thead>
+                <tbody style="text-align:left">
+                    <tr><td>100</td><td>5</td></tr>
+                    <tr><td>80~99</td><td>2</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mt10 clearfix" style="min-height:20px;height:20px;">
+        <button class="btnGreen" ng-show="showButton" ng-click="createHomework();">保存提交</button><button class="btnGreen" style="margin-left:10px;" ng-click="backToHomeworkList();">返回{{TypeName}}列表</button>
+    </div>
+
+    <question-list ng-show="showQuestion" show-ck="{show:false}" show-add-btn="showButton" from="{val:'safe'}"></question-list>
+
+</div>
+
+<div ng-if="data.current == 2">
+    <member-homework-list ></member-homework-list>
+</div>
+
+
